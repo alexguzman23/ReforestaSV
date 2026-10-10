@@ -45,12 +45,12 @@ También podrán beneficiarse:
 4. El sistema deberá utilizar SQL Server como gestor de base de datos.
 5. La aplicación deberá desarrollarse con Django, un framework de Python, para construir y organizar las funciones principales del sistema.
 
-## Clases Principales del Sistema
+## Clase Principal del Sistema
 
-1.**CampañaReforestación**: Administra los datos generales de las campañas, fechas y la institución beneficiaria.
-2.**Árbol**: Controla el inventario individual, código único, fecha de plantación y estado de salud actual.
-3.**Especie**: Almacena el catálogo de especies nativas y sus requerimientos de riego.
-4.**Ubicación**: Registra las coordenadas geográficas (latitud y longitud) y zonas de referencia.
-5.**Responsable**: Administra los roles y la asignación del personal de campo.
-6.**Mantenimiento**: Registra las actividades de riego, podas, comentarios y evidencias fotográficas.
-7.**Usuario**: Gestiona la autenticación y los permisos de acceso mediante el sistema de Django.
+1. **CampañaReforestación**: Administra los datos generales de las campañas, fechas y la institución beneficiaria.
+2. **Árbol**: Controla el inventario individual, código único, fecha de plantación y estado de salud actual.
+3. **Especie**: Almacena el catálogo de especies nativas y sus requerimientos de riego.
+4. **Ubicación**: Registra las coordenadas geográficas (latitud y longitud) y zonas de referencia.
+5. **Responsable**: Administra los roles y la asignación del personal de campo.
+6. **Mantenimiento**: Registra las actividades de riego, podas, comentarios y evidencias fotográficas.
+7. **Usuario**: Gestiona la autenticación y los permisos de acceso mediante el sistema de Django.
