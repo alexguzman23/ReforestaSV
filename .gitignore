@@ -1,0 +1,27 @@
+# Entorno virtual
+env/
+venv/
+.venv/
+
+# Variables de entorno y credenciales
+.env
+.env.*
+!.env.example
+
+# Archivos generados por Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Base de datos local SQLite
+db.sqlite3
+
+# Archivos temporales
+*.log
+.pytest_cache/
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
