@@ -54,3 +54,79 @@ También podrán beneficiarse:
 5. Responsable: Administra los roles y la asignación del personal de campo.
 6. Mantenimiento: Registra las actividades de riego, podas, comentarios y evidencias fotográficas.
 7. Usuario: Gestiona la autenticación y los permisos de acceso mediante el sistema de Django.
+
+## Instrucciones básicas para instalar y ejecutar la aplicación
+
+Para ejecutar ReforestaSV en un entorno local, es necesario tener instalados Python, SQL Server y el controlador ODBC para SQL Server.
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/alexguzman23/ReforestaSV.git
+cd ReforestaSV
+```
+
+### 2. Crear y activar el entorno virtual
+
+En la terminal de Visual Studio Code, ejecutar:
+
+```powershell
+py -m venv env
+```
+
+Activar el entorno virtual en Windows:
+
+```powershell
+.\env\Scripts\Activate.ps1
+```
+
+### 3. Instalar las dependencias
+
+Instalar las librerías necesarias utilizando el archivo `requirements.txt`:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+### 4. Configurar SQL Server
+
+Crear una base de datos en SQL Server con el nombre:
+
+`reforestasv_bd`
+
+En la carpeta principal del proyecto, donde se encuentra `manage.py`, crear un archivo llamado `.env` con la siguiente configuración de ejemplo:
+
+```dotenv
+DB_NAME=reforestasv_bd
+DB_HOST=localhost
+DB_DRIVER=ODBC Driver 17 for SQL Server
+DB_TRUSTED_CONNECTION=yes
+```
+
+Los valores deben ajustarse a la configuración de SQL Server de cada integrante. El archivo `.env` no debe subirse al repositorio por seguridad.
+
+### 5. Verificar la configuración
+
+Ejecutar el siguiente comando:
+
+```powershell
+python manage.py check
+```
+
+Si no existen errores, Django mostrará un mensaje indicando que la comprobación fue satisfactoria.
+
+### 6. Ejecutar la aplicación
+
+Iniciar el servidor de desarrollo de Django:
+
+```powershell
+python manage.py runserver
+```
+
+Abrir en el navegador la siguiente dirección:
+
+http://127.0.0.1:8000/
+
+Actualmente, la aplicación muestra una página básica de bienvenida a ReforestaSV, como comprobación del funcionamiento del servidor.
+
+**Nota:** Durante la Semana 4 se creó la estructura inicial del proyecto, se definieron las clases principales y se comprobó la conexión con SQL Server.
