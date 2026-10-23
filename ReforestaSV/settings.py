@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'CampanaReforestacion',
     'Gestion_Arboles',
+    'Usuarios'
 ]
 
 MIDDLEWARE = [
