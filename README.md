@@ -130,3 +130,34 @@ http://127.0.0.1:8000/
 Actualmente, la aplicación muestra una página básica de bienvenida a ReforestaSV, como comprobación del funcionamiento del servidor.
 
 **Nota:** Durante la Semana 4 se creó la estructura inicial del proyecto, se definieron las clases principales y se comprobó la conexión con SQL Server.
+
+
+## Semana 5: Implementación de Modelos y Base de Datos
+
+Durante esta semana se implementaron las clases principales del sistema como modelos de Django, estableciendo sus relaciones y creando las tablas correspondientes en SQL Server.
+
+### 1. Reestructuración de la Arquitectura
+* **Migración por funcionalidades:** Se reorganizó la estructura del proyecto de manera modular, separando las aplicaciones según su función (ej. `Gestion_Arboles` y `CampanaReforestacion`) y eliminando las carpetas obsoletas.
+* **Integración de Usuarios:** Se creó la aplicación `usuarios` para gestionar perfiles, roles y permisos, vinculándola con el sistema de autenticación de Django a través de `AUTH_USER_MODEL`.
+
+### 2. Creación y Definición de Modelos (POO)
+* Se desarrollaron las clases principales heredando de `models.Model`, definiendo los atributos con los tipos de datos apropiados.
+* Se implementó el método `__str__()` en cada modelo para facilitar su visualización y se añadieron métodos propios para definir el comportamiento de las entidades.
+* Se establecieron las relaciones entre los modelos (utilizando campos como `ForeignKey`) para conectar la información de las distintas aplicaciones.
+
+### 3. Migraciones en SQL Server
+* Se verificó la integridad del sistema mediante el comando `python manage.py check`, comprobando que no existieran errores de configuración.
+* Se ejecutó `python manage.py makemigrations` para preparar los archivos de migración de las aplicaciones `CampanaReforestacion`, `Gestion_Arboles` y `Usuarios`.
+* Se crearon las tablas físicas en la base de datos `reforestasv_bd` de SQL Server aplicando el comando `python manage.py migrate`.
+
+### 4. Datos de Prueba y Panel Administrativo
+* Se creó un superusuario (ej. `adonay`) desde la terminal utilizando `python manage.py createsuperuser`.
+* Se registraron los modelos en el panel administrativo de Django (`http://127.0.0.1:8000/admin`) y se ingresaron datos de prueba reales para el sistema:
+  * **Campañas:** Reforestación Chalatenango 2026.
+  * **Especies:** Registro de catálogo (ej. Maquilishuat).
+  * **Responsables:** Asignación de roles como "Encargado de campo".
+  * **Mantenimiento y Árboles:** Registro de inventario y evidencias de mantenimiento (ej. riegos de prueba).
+
+### 5. Control de Versiones
+* Se prepararon los cambios y se ejecutó `git pull` para sincronizar el repositorio local con los avances del equipo.
+* Se enviaron los cambios consolidados a la rama `main` mediante `git push`, manteniendo actualizado el historial de commits con las responsabilidades de cada integrante.
