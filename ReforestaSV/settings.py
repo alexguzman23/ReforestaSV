@@ -83,22 +83,21 @@ WSGI_APPLICATION = 'ReforestaSV.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': os.environ['DB_NAME'],
-        'HOST': os.environ['DB_HOST'],
+        'NAME': os.getenv('DB_NAME', 'reforestasv_bd'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', ''),
         'USER': os.getenv('DB_USER', ''),
         'PASSWORD': os.getenv('DB_PASSWORD', ''),
-        'Trusted_Connection': os.getenv('DB_TRUSTED_CONNECTION', 'yes'),
         'OPTIONS': {
             'driver': os.getenv('DB_DRIVER', 'ODBC Driver 17 for SQL Server'),
+            'trusted_connection': os.getenv('DB_TRUSTED_CONNECTION', 'yes'),
             'extra_params': (
                 'TrustServerCertificate='
-                + os.getenv('DB_TRUST_SERVER_CERTIFICATE', 'no')
+                + os.getenv('DB_TRUST_SERVER_CERTIFICATE', 'yes')
             ),
         },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators

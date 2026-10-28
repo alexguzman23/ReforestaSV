@@ -23,3 +23,19 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.inicio),
 ]
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('arboles/', include('Gestion_Arboles.urls')),
+]
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('arboles/', include('Gestion_Arboles.urls')), # <--- Asegúrate de tener esta línea
+]
