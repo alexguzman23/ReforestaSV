@@ -1,0 +1,21 @@
+{% extends 'arboles/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">Confirmar Eliminación</h5>
+            </div>
+            <div class="card-body text-center">
+                <p class="fs-5">¿Estás seguro de que deseas eliminar el árbol <strong>{{ arbol.codigo_unico }}</strong>?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <a href="{% url 'arbol_list' %}" class="btn btn-secondary me-2">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Confirmar y Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

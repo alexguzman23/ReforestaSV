@@ -1,0 +1,48 @@
+{% extends 'arboles/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-tree"></i> Inventario de Árboles</h2>
+    <a href="{% url 'arbol_create' %}" class="btn btn-success"><i class="bi bi-plus-lg"></i> Registrar Árbol</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Código</th>
+                        <th>Especie</th>
+                        <th>Fecha Plantación</th>
+                        <th>Estado</th>
+                        <th>Ubicación</th>
+                        <th>Responsable</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for arbol in arboles %}
+                    <tr>
+                        <td class="fw-bold">{{ arbol.codigo_unico }}</td>
+                        <td>{{ arbol.especie.nombre_comun }}</td>
+                        <td>{{ arbol.fecha_plantacion|date:"d/m/Y" }}</td>
+                        <td><span class="badge bg-info text-dark">{{ arbol.estado_salud }}</span></td>
+                        <td>{{ arbol.ubicacion.zona_referencia }}</td>
+                        <td>{{ arbol.responsable.nombre|default:"Sin asignar" }}</td>
+                        <td>
+                            <a href="{% url 'arbol_update' arbol.pk %}" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></a>
+                            <a href="{% url 'arbol_delete' arbol.pk %}" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center py-4 text-muted">No hay árboles registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
