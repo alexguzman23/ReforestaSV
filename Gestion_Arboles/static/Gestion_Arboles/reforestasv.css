@@ -105,4 +105,7 @@ footer { margin-top: auto; }
 }
 @media (max-width: 575.98px) {
     .btn { padding: .4rem .7rem; }
+body {
+    background-color: #f0f8ff !important; /* Azul muy suave solo para probar */
+}
 }

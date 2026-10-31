@@ -1,0 +1,28 @@
+{% extends 'arboles/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white text-center">
+                <h4>Iniciar Sesión - ReforestaSV</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Entrar</button>
+                    </div>
+                </form>
+
+                <!-- AQUÍ PONER EL ENLACE DE REGISTRO -->
+                <div class="text-center mt-3">
+                    <p class="mb-0">¿No tienes cuenta? <a href="{% url 'register' %}" class="text-success fw-bold">Regístrate aquí</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

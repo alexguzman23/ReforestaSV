@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import Arbol
 from .forms import ArbolForm
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 
 # 1. CONSULTAR (Listar)
 def arbol_list(request):
@@ -41,3 +45,17 @@ def arbol_delete(request, pk):
         messages.success(request, 'Árbol eliminado correctamente.')
         return redirect('arbol_list')
     return render(request, 'arboles/arbol_confirm_delete.html', {'arbol': arbol})
+   
+#5 vista de inicio
+@login_required(login_url='/accounts/login/')
+def inicio(request):
+    return render(request, 'arboles/inicio.html')
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login') # Redirige al login después de registrarse exitosamente
+    else:
+        form = UserCreationForm()
+    return render(request, 'arboles/register.html', {'form': form})

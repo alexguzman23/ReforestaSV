@@ -1,0 +1,25 @@
+{% extends 'arboles/base.html' %}
+
+{% block content %}
+
+<div class="container text-center mt-5">
+
+    <h1 class="display-4 fw-bold">
+        Bienvenido a ReforestaSV
+    </h1>
+
+    <p class="lead mt-3">
+        Una plataforma para gestionar árboles y
+        contribuir a la reforestación de nuestro entorno.
+    </p>
+
+    <div class="mt-4">
+
+        <a href="{% url 'arbol_list' %}" class="btn btn-success btn-lg">Gestionar árboles</a>
+            
+
+    </div>
+
+</div>
+
+{% endblock %}
