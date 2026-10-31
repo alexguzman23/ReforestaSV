@@ -16,15 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views as auth_views # <-- Importante para el login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Rutas de autenticación predeterminadas de Django
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='arboles/login.html'), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
-    
-    # Incluir las rutas de tu aplicación Gestion_Arboles
+    # Incluir las rutas de tu aplicación Gestion_Arboles (como el inicio y el inventario)
     path('', include('Gestion_Arboles.urls')),
+    
+    # Incluir todas las rutas de la app Usuarios (aquí entrará accounts/login/ y accounts/registro/)
+    path('accounts/', include('Usuarios.urls')),
 ]

@@ -1,0 +1,57 @@
+{% extends 'arboles/base.html' %}
+
+{% block title %}Iniciar Sesión - ReforestaSV{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center min-vh-75 py-4">
+    <div class="col-md-5 col-lg-4">
+        
+        <!-- Logo e identificación superior -->
+        <div class="text-center mb-4">
+            <span class="badge bg-success p-2 rounded-circle fs-4 text-white shadow-sm" style="background-color: #557A64 !important;">
+                <i class="bi bi-tree-fill"></i>
+            </span>
+            <h4 class="fw-bold mt-2 text-dark mb-0">ReforestaSV</h4>
+        </div>
+
+        <!-- Tarjeta del formulario estilo minimalista -->
+        <div class="card shadow border-0 rounded-4 p-4 bg-white">
+            <div class="card-body">
+                <span class="text-uppercase tracking-wide fw-bold text-success small d-block mb-1" style="color: #557A64 !important; font-size: 0.75rem;">Iniciar sesión</span>
+                <h3 class="fw-bold text-dark mb-1">Bienvenido</h3>
+                <p class="text-muted small mb-4">Ingresa tus datos para continuar.</p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label small fw-semibold text-secondary">Usuario</label>
+                        <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required class="form-control form-control-lg bg-light border-0 fs-6" id="id_username" placeholder="tu usuario">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="id_password" class="form-label small fw-semibold text-secondary">Contraseña</label>
+                        <input type="password" name="password" autocomplete="current-password" required class="form-control form-control-lg bg-light border-0 fs-6" id="id_password" placeholder="********">
+                    </div>
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger py-2 small mb-3">
+                            Usuario o contraseña incorrectos. Por favor, intenta de nuevo.
+                        </div>
+                    {% endif %}
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg fw-semibold shadow-sm" style="background-color: #557A64; border: none;">Iniciar sesión</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Pie sutil -->
+        <div class="text-center mt-4">
+            <small class="text-muted"><i class="bi bi-shield-check me-1"></i> Cada árbol cuenta</small>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

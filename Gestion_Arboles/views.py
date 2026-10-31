@@ -50,12 +50,3 @@ def arbol_delete(request, pk):
 @login_required(login_url='/accounts/login/')
 def inicio(request):
     return render(request, 'arboles/inicio.html')
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login') # Redirige al login después de registrarse exitosamente
-    else:
-        form = UserCreationForm()
-    return render(request, 'arboles/register.html', {'form': form})

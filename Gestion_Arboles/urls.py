@@ -7,5 +7,4 @@ urlpatterns = [
     path('nuevo/', views.arbol_create, name='arbol_create'),
     path('editar/<int:pk>/', views.arbol_update, name='arbol_update'),
     path('eliminar/<int:pk>/', views.arbol_delete, name='arbol_delete'),
-    path('registro/', views.register, name='register'),
 ]
