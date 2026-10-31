@@ -155,6 +155,39 @@ Durante esta semana se implementaron las clases principales del sistema como mod
 * Se registraron los modelos en el panel administrativo de Django (`http://127.0.0.1:8000/admin`) y se ingresaron datos de prueba reales para el sistema:
   * **Campañas:** Reforestación Chalatenango 2026.
   * **Especies:** Registro de catálogo (ej. Maquilishuat).
+ 
+  * ## Semana 6: Implementación del CRUD, Autenticación y Diseño de Interfaz
+
+Durante esta semana se desarrollaron nuevas funcionalidades para ReforestaSV, permitiendo administrar los árboles registrados, controlar el acceso de los usuarios y mejorar la presentación visual del sistema.
+
+### 1. Implementación del CRUD de Árboles
+
+- Se implementaron las operaciones de crear, consultar, editar y eliminar árboles mediante las vistas `arbol_create`, `arbol_list`, `arbol_update` y `arbol_delete`.
+- Se utilizaron formularios de Django (`ArbolForm`) para validar y almacenar la información.
+- Se configuraron las rutas correspondientes en `urls.py` para acceder a cada operación.
+- Se incorporaron plantillas HTML para mostrar el inventario y gestionar los registros.
+
+### 2. Autenticación y Seguridad
+
+- Se implementó el registro de usuarios mediante `UserCreationForm`.
+- Se configuraron las funciones de inicio y cierre de sesión utilizando `LoginView` y `LogoutView`.
+- Se protegieron las vistas mediante `@login_required`, restringiendo el acceso a usuarios no autenticados.
+- Se configuraron las redirecciones de inicio y cierre de sesión en `settings.py`.
+
+### 3. Diseño de Interfaz y Archivos Estáticos
+
+- Se personalizó la plantilla `base.html` utilizando Bootstrap 5 y Bootstrap Icons.
+- Se incorporó una barra de navegación con identificación del usuario y opción para cerrar sesión.
+- Se integraron notificaciones mediante `django.contrib.messages`.
+- Se creó el archivo `reforestasv.css` para personalizar los estilos de la aplicación y se corrigieron problemas relacionados con su carga.
+
+### 4. Control de Versiones y Pruebas
+
+- Se registraron los avances mediante commits en Git y se sincronizaron los cambios con el repositorio de GitHub.
+- Se verificó el funcionamiento del inventario, los formularios CRUD, la autenticación y la navegación.
+- Se comprobó la correcta aplicación de los estilos y componentes visuales.
+
+Con estas mejoras, ReforestaSV pasó de contar únicamente con una estructura inicial de modelos y base de datos a disponer de funcionalidades de administración de árboles, autenticación de usuarios e interfaces para la gestión de información.
   * **Responsables:** Asignación de roles como "Encargado de campo".
   * **Mantenimiento y Árboles:** Registro de inventario y evidencias de mantenimiento (ej. riegos de prueba).
 
