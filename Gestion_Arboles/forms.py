@@ -1,5 +1,5 @@
 from django import forms
-from .models import Arbol, Especie, Ubicacion 
+from .models import Arbol, Especie, Ubicacion, Mantenimiento 
 
 class ArbolForm(forms.ModelForm):
     class Meta:
@@ -52,4 +52,56 @@ class UbicacionForm(forms.ModelForm):
                 'placeholder': 'Ej. -89.2181900',
                 'step': '0.0000001'
             }),
+        }
+
+# ==========================================
+# FORMULARIO DE MANTENIMIENTO
+# ==========================================
+
+class MantenimientoForm(forms.ModelForm):
+
+    fecha_actividad = forms.DateTimeField(
+        input_formats=[
+            "%Y-%m-%dT%H:%M",
+            "%Y-%m-%dT%H:%M:%S",
+        ],
+        widget=forms.DateTimeInput(
+            format="%Y-%m-%dT%H:%M",
+            attrs={
+                "type": "datetime-local",
+                "class": "form-control",
+            }
+        )
+    )
+
+    class Meta:
+        model = Mantenimiento
+
+        fields = [
+            "arbol",
+            "tipo_actividad",
+            "fecha_actividad",
+            "comentarios",
+        ]
+
+        widgets = {
+            "arbol": forms.Select(
+                attrs={"class": "form-select"}
+            ),
+
+            "tipo_actividad": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Ej. Poda, riego o fertilización",
+                }
+            ),
+
+            "comentarios": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 4,
+                    "maxlength": 255,
+                    "placeholder": "Describe el mantenimiento realizado",
+                }
+            ),
         }

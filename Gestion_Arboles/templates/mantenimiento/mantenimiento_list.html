@@ -1,0 +1,278 @@
+
+{% extends 'arboles/base.html' %}
+{% load static %}
+
+{% block title %}Mantenimiento | ReforestaSV{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Gestion_Arboles/mantenimiento.css' %}">
+
+<section class="mtto">
+
+    <!-- Encabezado -->
+    <div class="mtto-header">
+        <div>
+            <h1>
+                <i class="bi bi-tools"></i>
+                Mantenimiento de Árboles
+            </h1>
+            <p>
+                Registra, consulta y gestiona las actividades
+                de mantenimiento de los árboles.
+            </p>
+        </div>
+    </div>
+
+    <!-- Buscador y filtros -->
+    <form method="get" class="mtto-filtros">
+
+        <div class="mtto-campo mtto-busqueda">
+            <label for="buscar">Buscar árbol</label>
+            <div class="mtto-input-icon">
+                <i class="bi bi-search"></i>
+                <input
+                    type="search"
+                    id="buscar"
+                    name="buscar"
+                    placeholder="Código o especie"
+                    value="{{ busqueda|default:'' }}"
+                >
+            </div>
+        </div>
+
+        <div class="mtto-campo">
+            <label for="tipo">Tipo de mantenimiento</label>
+            <select id="tipo" name="tipo">
+                <option value="">Todos los tipos</option>
+                {% for tipo in tipos %}
+                    <option value="{{ tipo }}"
+                        {% if tipo_seleccionado == tipo %}selected{% endif %}>
+                        {{ tipo }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mtto-filtro-botones">
+            <button type="submit" class="mtto-btn mtto-btn-secundario">
+                <i class="bi bi-funnel"></i>
+                Filtrar
+            </button>
+
+            <a href="{% url 'mantenimiento_create' %}"
+               class="mtto-btn mtto-btn-principal">
+                <i class="bi bi-plus-lg"></i>
+                Registrar mantenimiento
+            </a>
+        </div>
+
+    </form>
+
+    <!-- Estadísticas -->
+    <div class="mtto-estadisticas">
+
+        <div class="mtto-stat">
+            <div class="mtto-stat-icon icon-total">
+                <i class="bi bi-clipboard-check"></i>
+            </div>
+            <div>
+                <span>Total de mantenimientos</span>
+                <strong>{{ total_mantenimientos|default:"0" }}</strong>
+            </div>
+        </div>
+
+        <div class="mtto-stat">
+            <div class="mtto-stat-icon icon-hoy">
+                <i class="bi bi-check-circle"></i>
+            </div>
+            <div>
+                <span>Realizados hoy</span>
+                <strong>{{ realizados_hoy|default:"0" }}</strong>
+            </div>
+        </div>
+
+        <div class="mtto-stat">
+            <div class="mtto-stat-icon icon-arboles">
+                <i class="bi bi-tree"></i>
+            </div>
+            <div>
+                <span>Árboles atendidos</span>
+                <strong>{{ arboles_atendidos|default:"0" }}</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tabla -->
+    <div class="mtto-tabla-card">
+        <div class="table-responsive">
+
+            <table class="mtto-tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Código</th>
+                        <th>Árbol</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Responsable</th>
+                        <th>Comentarios</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for mantenimiento in mantenimientos %}
+                    <tr>
+                        <td>
+                            #{{ mantenimiento.id_mantenimiento }}
+                        </td>
+
+                        <td class="mtto-codigo">
+                            {{ mantenimiento.arbol.codigo_unico }}
+                        </td>
+
+                        <td>
+                            {{ mantenimiento.arbol.especie.nombre_comun }}
+                        </td>
+
+                        <td>
+                            <span class="mtto-etiqueta">
+                                {{ mantenimiento.tipo_actividad }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ mantenimiento.fecha_actividad|date:"d/m/Y" }}
+                            <small>
+                                {{ mantenimiento.fecha_actividad|date:"H:i" }}
+                            </small>
+                        </td>
+
+                        <td>
+                            {{ mantenimiento.usuario.username }}
+                        </td>
+
+                        <td class="mtto-comentario">
+                            {{ mantenimiento.comentarios|truncatechars:45 }}
+                        </td>
+
+                        <td>
+                            <div class="mtto-acciones">
+
+                                <!-- Consultar -->
+                                <button
+                                    type="button"
+                                    class="mtto-accion ver"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#detalle-{{ mantenimiento.pk }}"
+                                    title="Ver detalles"
+                                    aria-label="Ver mantenimiento {{ mantenimiento.pk }}"
+                                >
+                                    <i class="bi bi-eye"></i>
+                                </button>
+
+                                <!-- Editar -->
+                                <a
+                                    href="{% url 'mantenimiento_update' mantenimiento.pk %}"
+                                    class="mtto-accion editar"
+                                    title="Editar"
+                                    aria-label="Editar mantenimiento {{ mantenimiento.pk }}"
+                                >
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+
+                                <!-- Eliminar -->
+                                <a
+                                    href="{% url 'mantenimiento_delete' mantenimiento.pk %}"
+                                    class="mtto-accion eliminar"
+                                    title="Eliminar"
+                                    aria-label="Eliminar mantenimiento {{ mantenimiento.pk }}"
+                                >
+                                    <i class="bi bi-trash"></i>
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="mtto-vacio">
+                            <i class="bi bi-inbox"></i>
+                            <p>No hay mantenimientos registrados.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Ventanas para consultar detalles -->
+    {% for mantenimiento in mantenimientos %}
+    <div
+        class="modal fade"
+        id="detalle-{{ mantenimiento.pk }}"
+        tabindex="-1"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content mtto-modal">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-clipboard-check"></i>
+                        Detalle del mantenimiento
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar"
+                    ></button>
+                </div>
+
+                <div class="modal-body">
+                    <dl class="mtto-detalles">
+                        <dt>Árbol</dt>
+                        <dd>
+                            {{ mantenimiento.arbol.codigo_unico }}
+                            —
+                            {{ mantenimiento.arbol.especie.nombre_comun }}
+                        </dd>
+
+                        <dt>Actividad</dt>
+                        <dd>{{ mantenimiento.tipo_actividad }}</dd>
+
+                        <dt>Fecha</dt>
+                        <dd>
+                            {{ mantenimiento.fecha_actividad|date:"d/m/Y H:i" }}
+                        </dd>
+
+                        <dt>Usuario responsable</dt>
+                        <dd>{{ mantenimiento.usuario.username }}</dd>
+
+                        <dt>Comentarios</dt>
+                        <dd>{{ mantenimiento.comentarios }}</dd>
+                    </dl>
+                </div>
+
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="mtto-btn mtto-btn-secundario"
+                        data-bs-dismiss="modal"
+                    >
+                        Cerrar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+{% endblock %}

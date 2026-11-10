@@ -22,4 +22,13 @@ urlpatterns = [
     path('ubicaciones/nueva/', views.ubicacion_create, name='ubicacion_create'),
     path('ubicaciones/editar/<int:pk>/', views.ubicacion_update, name='ubicacion_update'),
     path('ubicaciones/eliminar/<int:pk>/', views.ubicacion_delete, name='ubicacion_delete'),
+
+    
+    # Rutas de Mantenimiento
+    path('mantenimiento/', views.mantenimiento_list, name='mantenimiento_list'),
+    path('mantenimiento/nuevo/', views.mantenimiento_create, name='mantenimiento_create'),
+    path('mantenimiento/editar/<int:pk>/', views.mantenimiento_update, name='mantenimiento_update'),
+    path('mantenimiento/eliminar/<int:pk>/', views.mantenimiento_delete, name='mantenimiento_delete'),
+    
 ]
+
