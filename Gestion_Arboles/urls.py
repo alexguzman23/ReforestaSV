@@ -15,5 +15,11 @@ urlpatterns = [
     path('especies/', views.especie_list, name='especie_list'),
     path('especies/nueva/', views.especie_create, name='especie_create'),
     path('especies/editar/<int:pk>/', views.especie_update, name='especie_update'),
-    path('especies/eliminar/<int:pk>/', views.especie_delete, name='especie_delete'),
+    path('especies/eliminar/<int:pk>/', views.especie_delete, name='especie_delete'), 
+
+    # Rutas de Ubicaciones
+    path('ubicaciones/', views.ubicacion_list, name='ubicacion_list'),
+    path('ubicaciones/nueva/', views.ubicacion_create, name='ubicacion_create'),
+    path('ubicaciones/editar/<int:pk>/', views.ubicacion_update, name='ubicacion_update'),
+    path('ubicaciones/eliminar/<int:pk>/', views.ubicacion_delete, name='ubicacion_delete'),
 ]

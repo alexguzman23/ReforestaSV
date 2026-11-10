@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Arbol, Especie
-from .forms import ArbolForm, EspecieForm
+from .models import Arbol, Especie, Ubicacion
+from .forms import ArbolForm, EspecieForm, UbicacionForm
+from django.db.models.deletion import ProtectedError
+
 
 # ==========================================
 # CRUD ÁRBOLES
@@ -92,9 +94,90 @@ def especie_delete(request, pk):
     return render(request, 'arboles/especie_confirm_delete.html', {'especie': especie})
 
 
+
+# ==========================================
+# CRUD UBICACIONES
+# ==========================================
+
+# 1. CONSULTAR UBICACIONES
+def ubicacion_list(request):
+    ubicaciones = Ubicacion.objects.all()
+
+    return render(request, 'ubicaciones/ubicacion_list.html', {
+        'ubicaciones': ubicaciones
+    })
+
+# 2. REGISTRAR UBICACIÓN
+def ubicacion_create(request):
+    if request.method == 'POST':
+        form = UbicacionForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                'Ubicación registrada exitosamente.'
+            )
+            return redirect('ubicacion_list')
+    else:
+        form = UbicacionForm()
+
+    return render(request, 'ubicaciones/ubicacion_form.html', {
+        'form': form,
+        'titulo': 'Registrar Ubicación'
+    })
+
+# 3. MODIFICAR UBICACIÓN
+def ubicacion_update(request, pk):
+    ubicacion = get_object_or_404(Ubicacion, pk=pk)
+
+    if request.method == 'POST':
+        form = UbicacionForm(request.POST, instance=ubicacion)
+
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                'Ubicación actualizada correctamente.'
+            )
+            return redirect('ubicacion_list')
+    else:
+        form = UbicacionForm(instance=ubicacion)
+
+    return render(request, 'ubicaciones/ubicacion_form.html', {
+        'form': form,
+        'titulo': 'Modificar Ubicación'
+    })
+
+# 4. ELIMINAR UBICACIÓN
+def ubicacion_delete(request, pk):
+    ubicacion = get_object_or_404(Ubicacion, pk=pk)
+
+    if request.method == 'POST':
+        try:
+            ubicacion.delete()
+            messages.success(
+                request,
+                'Ubicación eliminada correctamente.'
+            )
+        except ProtectedError:
+            messages.error(
+                request,
+                'No se puede eliminar esta ubicación porque tiene árboles asociados.'
+            )
+
+        return redirect('ubicacion_list')
+
+    return render(
+        request,
+        'ubicaciones/ubicacion_confirm_delete.html',
+        {'ubicacion': ubicacion}
+    )
+
 # ==========================================
 # VISTA INICIO
 # ==========================================
 @login_required(login_url='/accounts/login/')
 def inicio(request):
     return render(request, 'arboles/inicio.html')
+
