@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from .models import Arbol
-from .forms import ArbolForm
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from .models import Arbol, Especie
+from .forms import ArbolForm, EspecieForm
+
+# ==========================================
+# CRUD ÁRBOLES
+# ==========================================
 
 # 1. CONSULTAR (Listar)
 def arbol_list(request):
@@ -45,8 +46,55 @@ def arbol_delete(request, pk):
         messages.success(request, 'Árbol eliminado correctamente.')
         return redirect('arbol_list')
     return render(request, 'arboles/arbol_confirm_delete.html', {'arbol': arbol})
-   
-#5 vista de inicio
+
+
+# ==========================================
+# CRUD ESPECIES
+# ==========================================
+
+# 1. CONSULTAR ESPECIES
+def especie_list(request):
+    especies = Especie.objects.all()
+    return render(request, 'arboles/especie_list.html', {'especies': especies})
+
+# 2. REGISTRAR ESPECIE
+def especie_create(request):
+    if request.method == 'POST':
+        form = EspecieForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Especie registrada exitosamente.')
+            return redirect('especie_list')
+    else:
+        form = EspecieForm()
+    return render(request, 'arboles/especie_form.html', {'form': form, 'titulo': 'Registrar Especie'})
+
+# 3. MODIFICAR ESPECIE
+def especie_update(request, pk):
+    especie = get_object_or_404(Especie, pk=pk)
+    if request.method == 'POST':
+        form = EspecieForm(request.POST, instance=especie)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Especie actualizada correctamente.')
+            return redirect('especie_list')
+    else:
+        form = EspecieForm(instance=especie)
+    return render(request, 'arboles/especie_form.html', {'form': form, 'titulo': 'Modificar Especie'})
+
+# 4. ELIMINAR ESPECIE
+def especie_delete(request, pk):
+    especie = get_object_or_404(Especie, pk=pk)
+    if request.method == 'POST':
+        especie.delete()
+        messages.success(request, 'Especie eliminada correctamente.')
+        return redirect('especie_list')
+    return render(request, 'arboles/especie_confirm_delete.html', {'especie': especie})
+
+
+# ==========================================
+# VISTA INICIO
+# ==========================================
 @login_required(login_url='/accounts/login/')
 def inicio(request):
     return render(request, 'arboles/inicio.html')

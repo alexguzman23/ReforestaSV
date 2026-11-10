@@ -1,0 +1,58 @@
+{% extends 'arboles/base.html' %}
+
+{% block title %}Catálogo de Especies - ReforestaSV{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-flower1"></i> Catálogo de Especies Nativas</h2>
+    <a href="{% url 'especie_create' %}" class="btn btn-success">
+        <i class="bi bi-plus-lg me-1"></i> Registrar Especie
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Común</th>
+                        <th>Nombre Científico</th>
+                        <th>Familia</th>
+                        <th>Tipo de Suelo</th>
+                        <th>Estado de Conservación</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for especie in especies %}
+                    <tr>
+                        <td class="fw-bold">{{ especie.pk }}</td>
+                        <td class="fw-semibold">{{ especie.nombre_comun }}</td>
+                        <td class="fst-italic text-secondary">{{ especie.nombre_cientifico }}</td>
+                        <td>{{ especie.familia|default:"Sin especificar" }}</td>
+                        <td>{{ especie.tipo_suelo|default:"Variado" }}</td>
+                        <td>
+                            <span class="badge bg-success">{{ especie.estado_conservacion|default:"Estable" }}</span>
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'especie_update' especie.pk %}" class="btn btn-sm btn-outline-warning me-1" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'especie_delete' especie.pk %}" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center py-4 text-muted">No hay especies registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
