@@ -17,7 +17,7 @@ class CampanaReforestacion(models.Model):
         return self.nombre
 
     def consultar_progreso(self):
-        return self.arboles.count()
+        return self.arbol_set.count()
 
     def __str__(self):
         return self.nombre

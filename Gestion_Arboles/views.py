@@ -62,7 +62,7 @@ def arbol_delete(request, pk):
 # 1. CONSULTAR ESPECIES
 def especie_list(request):
     especies = Especie.objects.all()
-    return render(request, 'arboles/especie_list.html', {'especies': especies})
+    return render(request, 'especies/especies_list.html', {'especies': especies})
 
 # 2. REGISTRAR ESPECIE
 def especie_create(request):
@@ -74,7 +74,7 @@ def especie_create(request):
             return redirect('especie_list')
     else:
         form = EspecieForm()
-    return render(request, 'arboles/especie_form.html', {'form': form, 'titulo': 'Registrar Especie'})
+    return render(request, 'especies/especies_form.html', {'form': form, 'titulo': 'Registrar Especie'})
 
 # 3. MODIFICAR ESPECIE
 def especie_update(request, pk):
@@ -87,7 +87,7 @@ def especie_update(request, pk):
             return redirect('especie_list')
     else:
         form = EspecieForm(instance=especie)
-    return render(request, 'arboles/especie_form.html', {'form': form, 'titulo': 'Modificar Especie'})
+    return render(request, 'especies/especies_form.html', {'form': form, 'titulo': 'Modificar Especie'})
 
 # 4. ELIMINAR ESPECIE
 def especie_delete(request, pk):
@@ -96,7 +96,7 @@ def especie_delete(request, pk):
         especie.delete()
         messages.success(request, 'Especie eliminada correctamente.')
         return redirect('especie_list')
-    return render(request, 'arboles/especie_confirm_delete.html', {'especie': especie})
+    return render(request, 'especies/especies_confirm_delete.html', {'especie': especie})
 
 
 
@@ -246,7 +246,7 @@ def mantenimiento_list(request):
 
     return render(
         request,
-        "arboles/mantenimiento_list.html",
+        "mantenimiento/mantenimiento_list.html",
         contexto
     )
 
@@ -278,7 +278,7 @@ def mantenimiento_create(request):
 
     return render(
         request,
-        "arboles/mantenimiento_form.html",
+        "mantenimiento/mantenimiento_form.html",
         {
             "form": form,
             "titulo": "Registrar mantenimiento"
@@ -318,7 +318,7 @@ def mantenimiento_update(request, pk):
 
     return render(
         request,
-        "arboles/mantenimiento_form.html",
+        "mantenimiento/mantenimiento_form.html",
         {
             "form": form,
             "titulo": "Modificar mantenimiento",

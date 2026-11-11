@@ -1,0 +1,285 @@
+
+:root {
+    --rf-primary: #1f7a4d;
+    --rf-dark: #103e29;
+    --rf-sidebar: #103923;
+    --rf-background: #f8faf9;
+    --rf-text: #20272b;
+}
+
+body.rf-body {
+    margin: 0;
+    background: var(--rf-background);
+    color: var(--rf-text);
+    font-family: system-ui, "Segoe UI", Arial, sans-serif;
+}
+
+/* Estructura principal */
+.rf-app {
+    min-height: 100vh;
+}
+
+.rf-main {
+    min-height: 100vh;
+    margin-left: 260px;
+}
+
+/* Menú lateral */
+.rf-sidebar {
+    width: 260px !important;
+    background: linear-gradient(
+        180deg, #0e3a25, #135236
+    ) !important;
+    color: white;
+    border: 0 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 992px) {
+    .rf-sidebar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1030;
+    }
+}
+
+.rf-sidebar-header {
+    padding: 27px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rf-brand {
+    color: white;
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: 750;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rf-brand:hover {
+    color: white;
+}
+
+.rf-brand i {
+    font-size: 28px;
+}
+
+/* Opciones de navegación */
+.rf-nav {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.rf-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 17px;
+    border-radius: 10px;
+    color: #edf7f0;
+    text-decoration: none;
+    font-size: 15px;
+    transition: background .2s;
+}
+
+.rf-nav-link i {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+
+a.rf-nav-link:hover,
+.rf-nav-link.active {
+    background: #21834c;
+    color: white;
+}
+
+.rf-nav-pending {
+    opacity: .65;
+    cursor: default;
+}
+
+.rf-sidebar-footer {
+    margin-top: auto;
+    padding: 25px;
+    color: #bed9c7;
+    font-size: 13px;
+}
+
+.rf-sidebar-footer i {
+    margin-right: 8px;
+}
+
+/* Barra superior */
+.rf-topbar {
+    background: #16764b;
+    color: white;
+    min-height: 64px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 12px 30px;
+}
+
+.rf-user {
+    color: white;
+    font-size: 14px;
+}
+
+.rf-menu-toggle {
+    color: white;
+}
+
+.rf-menu-toggle:hover {
+    color: white;
+}
+
+/* Contenido */
+.rf-content {
+    max-width: 1550px;
+    padding: 30px 35px;
+    margin: 0 auto;
+}
+
+/* Bienvenida */
+.rf-welcome {
+    padding: 30px 0 40px;
+}
+
+.rf-welcome-icon {
+    color: #299244;
+    font-size: 52px;
+    margin-bottom: 12px;
+}
+
+.rf-welcome h1 {
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 750;
+    margin-bottom: 12px;
+}
+
+.rf-welcome p {
+    color: #697580;
+    font-size: 17px;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+/* Tarjetas */
+.rf-module-card {
+    background: white;
+    border: 1px solid #edf0ed;
+    border-radius: 16px;
+    padding: 26px 20px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .045);
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.rf-module-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+}
+
+.rf-module-icon {
+    width: 68px;
+    height: 68px;
+    background: #eaf6ed;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #19753a;
+    font-size: 32px;
+    margin-bottom: 18px;
+}
+
+.rf-module-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.rf-module-card p {
+    color: #6b7580;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    flex-grow: 1;
+}
+
+/* Botones de tarjetas */
+.rf-module-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    background: #edf8ef;
+    border: 1px solid #d2ebd7;
+    color: #146733;
+    padding: 10px 12px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: 650;
+    font-size: 14px;
+}
+
+a.rf-module-btn:hover {
+    background: #d9f0df;
+    color: #104d2a;
+}
+
+.rf-btn-pending {
+    color: #87928b;
+    background: #f6f7f6;
+    border-color: #eeeeee;
+    cursor: default;
+}
+
+/* Diseño responsive */
+@media (max-width: 991.98px) {
+    .rf-main {
+        margin-left: 0;
+    }
+
+    .rf-sidebar {
+        height: 100vh;
+    }
+
+    .rf-content {
+        padding: 25px 18px;
+    }
+
+    .rf-topbar {
+        padding: 12px 18px;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .rf-user {
+        font-size: 12px;
+    }
+
+    .rf-welcome {
+        padding: 20px 0 30px;
+    }
+
+    .rf-welcome p {
+        font-size: 15px;
+    }
+}

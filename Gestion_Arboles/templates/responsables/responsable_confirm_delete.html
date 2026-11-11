@@ -15,7 +15,7 @@
 
         <p class="mb-4">
             Responsable:
-            <strong>{{ encargado.nombre }}</strong>
+            <strong>{{ responsable.nombre }}</strong>
         </p>
 
         <form method="post">
@@ -25,7 +25,7 @@
                 <i class="bi bi-trash"></i> Confirmar eliminación
             </button>
 
-            <a href="{% url 'encargado_list' %}" class="btn btn-secondary">
+            <a href="{% url 'responsable_list' %}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left"></i> Cancelar
             </a>
         </form>

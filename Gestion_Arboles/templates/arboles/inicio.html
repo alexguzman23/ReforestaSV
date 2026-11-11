@@ -1,25 +1,152 @@
+
 {% extends 'arboles/base.html' %}
+
+{% block title %}Inicio | ReforestaSV{% endblock %}
 
 {% block content %}
 
-<div class="container text-center mt-5">
+<!-- BIENVENIDA -->
+<section class="rf-welcome text-center">
 
-    <h1 class="display-4 fw-bold">
-        Bienvenido a ReforestaSV
-    </h1>
+    <div class="rf-welcome-icon">
+        <i class="bi bi-tree-fill"></i>
+    </div>
 
-    <p class="lead mt-3">
-        Una plataforma para gestionar árboles y
-        contribuir a la reforestación de nuestro entorno.
+    <h1>Bienvenido a ReforestaSV</h1>
+
+    <p>
+        Sistema para gestionar campañas de reforestación
+        y dar seguimiento al cuidado de los árboles.
     </p>
 
-    <div class="mt-4">
+</section>
 
-        <a href="{% url 'arbol_list' %}" class="btn btn-success btn-lg">Gestionar árboles</a>
-            
+<!-- MÓDULOS -->
+<section class="rf-modules">
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- ÁRBOLES -->
+        <div class="col-md-6 col-xl-3">
+            <div class="rf-module-card">
+                <div class="rf-module-icon">
+                    <i class="bi bi-tree-fill"></i>
+                </div>
+
+                <h3>Gestión de Árboles</h3>
+                <p>Registra, consulta y actualiza los árboles.</p>
+
+                <a href="{% url 'arbol_list' %}" class="rf-module-btn">
+                    Ir a Árboles
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- ESPECIES -->
+        <div class="col-md-6 col-xl-3">
+            <div class="rf-module-card">
+                <div class="rf-module-icon">
+                    <i class="bi bi-flower1"></i>
+                </div>
+
+                <h3>Especies</h3>
+                <p>Administra el catálogo de especies.</p>
+
+                <a href="{% url 'especie_list' %}" class="rf-module-btn">
+                    Ir a Especies
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- UBICACIONES -->
+        <div class="col-md-6 col-xl-3">
+            <div class="rf-module-card">
+                <div class="rf-module-icon">
+                    <i class="bi bi-geo-alt"></i>
+                </div>
+
+                <h3>Ubicaciones</h3>
+                <p>Gestiona los lugares de reforestación.</p>
+
+                <a href="{% url 'ubicacion_list' %}" class="rf-module-btn">
+                    Ir a Ubicaciones
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- RESPONSABLES -->
+        <div class="col-md-6 col-xl-3">
+            <div class="rf-module-card">
+                <div class="rf-module-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <h3>Responsables</h3>
+                <p>Administra las personas responsables.</p>
+
+                <a href="{% url 'responsable_list' %}" class="rf-module-btn">
+                    Ir a Responsables
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- MANTENIMIENTOS -->
+        <div class="col-md-6 col-xl-3">
+            <div class="rf-module-card">
+                <div class="rf-module-icon">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+
+                <h3>Mantenimientos</h3>
+                <p>Registra y consulta el cuidado de los árboles.</p>
+
+                <a href="{% url 'mantenimiento_list' %}" class="rf-module-btn">
+                    Ir a Mantenimientos
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- CAMPAÑAS: PENDIENTE -->
+        <div class="col-md-6 col-xl-3">
+            <div class="rf-module-card">
+                <div class="rf-module-icon">
+                    <i class="bi bi-megaphone"></i>
+                </div>
+
+                <h3>Campañas</h3>
+                <p>Crea y administra campañas de reforestación.</p>
+
+                <!-- Activar cuando exista campana_list -->
+                <span class="rf-module-btn rf-btn-pending">
+                    Próximamente
+                </span>
+            </div>
+        </div>
+
+        <!-- USUARIOS: PENDIENTE -->
+        <div class="col-md-6 col-xl-3">
+            <div class="rf-module-card">
+                <div class="rf-module-icon">
+                    <i class="bi bi-person"></i>
+                </div>
+
+                <h3>Usuarios</h3>
+                <p>Gestiona los usuarios del sistema.</p>
+
+                <!-- Activar cuando exista usuario_list -->
+                <span class="rf-module-btn rf-btn-pending">
+                    Próximamente
+                </span>
+            </div>
+        </div>
 
     </div>
 
-</div>
+</section>
 
 {% endblock %}

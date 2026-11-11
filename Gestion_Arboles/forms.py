@@ -20,14 +20,17 @@ class ArbolForm(forms.ModelForm):
 class EspecieForm(forms.ModelForm):
     class Meta:
         model = Especie
-        fields = ['nombre_comun', 'nombre_cientifico', 'familia', 'tipo_suelo', 'estado_conservacion']
+        fields = [
+            'nombre_comun',
+            'nombre_cientifico',
+            'requerimientos_riego'
+        ]
         widgets = {
-            'nombre_comun': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Maquilishuat'}),
-            'nombre_cientifico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Tabebuia rosea'}),
-            'familia': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Bignoniaceae'}),
-            'tipo_suelo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Franco-arcilloso'}),
-            'estado_conservacion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Estable'}),
+            'nombre_comun': forms.TextInput(attrs={'class': 'form-control'}),
+            'nombre_cientifico': forms.TextInput(attrs={'class': 'form-control'}),
+            'requerimientos_riego': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
         
 # ==========================================
 # FORMULARIO UBICACIONES
