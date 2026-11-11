@@ -349,7 +349,7 @@ def mantenimiento_delete(request, pk):
 
     return render(
         request,
-        "arboles/mantenimiento_confirm_delete.html",
+        "mantenimiento/mantenimiento_confirm_delete.html",
         {
             "mantenimiento": mantenimiento
         }
