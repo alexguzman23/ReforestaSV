@@ -1,5 +1,6 @@
 from django import forms
-from .models import Arbol, Especie
+from .models import Arbol, Especie, Ubicacion, Mantenimiento, Responsable 
+
 
 class ArbolForm(forms.ModelForm):
     class Meta:
@@ -26,4 +27,113 @@ class EspecieForm(forms.ModelForm):
             'familia': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Bignoniaceae'}),
             'tipo_suelo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Franco-arcilloso'}),
             'estado_conservacion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Estable'}),
+        }
+        
+# ==========================================
+# FORMULARIO UBICACIONES
+# ==========================================
+
+class UbicacionForm(forms.ModelForm):
+    class Meta:
+        model = Ubicacion
+        fields = ['zona_referencia', 'latitud', 'longitud']
+
+        widgets = {
+            'zona_referencia': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ej. Parque central'
+            }),
+            'latitud': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ej. 13.6929400',
+                'step': '0.0000001'
+            }),
+            'longitud': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ej. -89.2181900',
+                'step': '0.0000001'
+            }),
+        }
+
+# ==========================================
+# FORMULARIO DE MANTENIMIENTO
+# ==========================================
+
+class MantenimientoForm(forms.ModelForm):
+
+    fecha_actividad = forms.DateTimeField(
+        input_formats=[
+            "%Y-%m-%dT%H:%M",
+            "%Y-%m-%dT%H:%M:%S",
+        ],
+        widget=forms.DateTimeInput(
+            format="%Y-%m-%dT%H:%M",
+            attrs={
+                "type": "datetime-local",
+                "class": "form-control",
+            }
+        )
+    )
+
+    class Meta:
+        model = Mantenimiento
+
+        fields = [
+            "arbol",
+            "tipo_actividad",
+            "fecha_actividad",
+            "comentarios",
+        ]
+
+        widgets = {
+            "arbol": forms.Select(
+                attrs={"class": "form-select"}
+            ),
+
+            "tipo_actividad": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Ej. Poda, riego o fertilización",
+                }
+            ),
+
+            "comentarios": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 4,
+                    "maxlength": 255,
+                    "placeholder": "Describe el mantenimiento realizado",
+                }
+            ),
+        }
+
+# ==========================================
+# FORMULARIO DE RESPONSABLE
+# ==========================================
+
+class ResponsableForm(forms.ModelForm):
+    class Meta:
+        model = Responsable
+
+        fields = [
+            'nombre',
+            'rol_asignado',
+            'contacto',
+        ]
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese el nombre del responsable'
+            }),
+
+            'rol_asignado': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ej. Supervisor de zona'
+            }),
+
+            'contacto': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese información de contacto'
+            }),
         }

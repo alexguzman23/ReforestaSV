@@ -124,6 +124,3 @@ class Mantenimiento(models.Model):
 
     def __str__(self):
         return self.tipo_actividad
-
-
-
