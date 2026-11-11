@@ -1,0 +1,63 @@
+
+{% extends 'arboles/base.html' %}
+{% load static %}
+
+{% block title %}Eliminar mantenimiento | ReforestaSV{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Gestion_Arboles/mantenimiento.css' %}">
+
+<section class="mtto">
+
+    <div class="mtto-delete-card">
+
+        <div class="mtto-delete-icon">
+            <i class="bi bi-trash3"></i>
+        </div>
+
+        <h2>Eliminar mantenimiento</h2>
+
+        <p>
+            ¿Estás seguro de que deseas eliminar el
+            mantenimiento del árbol
+            <strong>{{ mantenimiento.arbol.codigo_unico }}</strong>?
+        </p>
+
+        <div class="mtto-delete-info">
+            <div>
+                <span>Actividad</span>
+                <strong>{{ mantenimiento.tipo_actividad }}</strong>
+            </div>
+
+            <div>
+                <span>Fecha</span>
+                <strong>
+                    {{ mantenimiento.fecha_actividad|date:"d/m/Y" }}
+                </strong>
+            </div>
+        </div>
+
+        <p class="mtto-advertencia">
+            Esta acción no se puede deshacer.
+        </p>
+
+        <form method="post" class="mtto-delete-actions">
+            {% csrf_token %}
+
+            <a
+                href="{% url 'mantenimiento_list' %}"
+                class="mtto-btn mtto-btn-secundario"
+            >
+                Cancelar
+            </a>
+
+            <button type="submit" class="mtto-btn mtto-btn-peligro">
+                <i class="bi bi-trash"></i>
+                Confirmar eliminación
+            </button>
+        </form>
+
+    </div>
+
+</section>
+{% endblock %}

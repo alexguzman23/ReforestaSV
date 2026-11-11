@@ -460,4 +460,3 @@ def responsable_delete(request, pk):
 def inicio(request):
     return render(request, 'arboles/inicio.html')
 
-

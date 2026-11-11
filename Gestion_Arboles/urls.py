@@ -24,6 +24,7 @@ urlpatterns = [
     path('ubicaciones/editar/<int:pk>/', views.ubicacion_update, name='ubicacion_update'),
     path('ubicaciones/eliminar/<int:pk>/', views.ubicacion_delete, name='ubicacion_delete'),
 
+    
     # Rutas de Mantenimiento
     path('mantenimiento/', views.mantenimiento_list, name='mantenimiento_list'),
     path('mantenimiento/nuevo/', views.mantenimiento_create, name='mantenimiento_create'),

@@ -1,0 +1,103 @@
+
+{% extends 'arboles/base.html' %}
+{% load static %}
+
+{% block title %}{{ titulo }} | ReforestaSV{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Gestion_Arboles/mantenimiento.css' %}">
+
+<section class="mtto">
+
+    <div class="mtto-header">
+        <div>
+            <a href="{% url 'mantenimiento_list' %}"
+               class="mtto-volver">
+                <i class="bi bi-arrow-left"></i>
+                Volver a mantenimientos
+            </a>
+
+            <h1>
+                <i class="bi bi-tools"></i>
+                {{ titulo|default:"Registrar mantenimiento" }}
+            </h1>
+
+            <p>
+                Completa la información correspondiente
+                a la actividad realizada.
+            </p>
+        </div>
+    </div>
+
+    <div class="mtto-form-card">
+
+        <div class="mtto-form-title">
+            <i class="bi bi-clipboard-plus"></i>
+            Información del mantenimiento
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            <div class="mtto-form-grid">
+
+                <div class="mtto-campo">
+                    <label for="{{ form.arbol.id_for_label }}">
+                        Árbol
+                    </label>
+                    {{ form.arbol }}
+                    {{ form.arbol.errors }}
+                </div>
+
+                <div class="mtto-campo">
+                    <label for="{{ form.tipo_actividad.id_for_label }}">
+                        Tipo de actividad
+                    </label>
+                    {{ form.tipo_actividad }}
+                    {{ form.tipo_actividad.errors }}
+                </div>
+
+                <div class="mtto-campo">
+                    <label for="{{ form.fecha_actividad.id_for_label }}">
+                        Fecha y hora
+                    </label>
+                    {{ form.fecha_actividad }}
+                    {{ form.fecha_actividad.errors }}
+                </div>
+
+                <div class="mtto-campo mtto-full">
+                    <label for="{{ form.comentarios.id_for_label }}">
+                        Comentarios
+                    </label>
+                    {{ form.comentarios }}
+                    {{ form.comentarios.errors }}
+                </div>
+
+            </div>
+
+            <div class="mtto-form-footer">
+                <a
+                    href="{% url 'mantenimiento_list' %}"
+                    class="mtto-btn mtto-btn-secundario"
+                >
+                    Cancelar
+                </a>
+
+                <button
+                    type="submit"
+                    class="mtto-btn mtto-btn-principal"
+                >
+                    <i class="bi bi-check-lg"></i>
+                    Guardar mantenimiento
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+{% endblock %}
+
+
