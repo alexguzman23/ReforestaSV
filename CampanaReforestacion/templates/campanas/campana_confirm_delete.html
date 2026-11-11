@@ -1,0 +1,21 @@
+{% extends 'arboles/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger shadow">
+            <div class="card-header bg-danger text-white">
+                <h3>Eliminar Campaña</h3>
+            </div>
+            <div class="card-body text-center">
+                <p>¿Estás seguro de que deseas eliminar la campaña <strong>"{{ campana.nombre }}"</strong>?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                    <a href="{% url 'campana_list' %}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

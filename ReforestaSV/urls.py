@@ -19,10 +19,14 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+
+    # Colocar campanas/''
+    path('campanas/', include('CampanaReforestacion.urls')),
+
     # Incluir las rutas de tu aplicación Gestion_Arboles (como el inicio y el inventario)
     path('', include('Gestion_Arboles.urls')),
     
     # Incluir todas las rutas de la app Usuarios (aquí entrará accounts/login/ y accounts/registro/)
     path('accounts/', include('Usuarios.urls')),
+
 ]

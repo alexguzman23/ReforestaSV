@@ -1,0 +1,38 @@
+{% extends 'arboles/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Campañas de Reforestación</h2>
+    <a href="{% url 'campana_create' %}" class="btn btn-success">+ Crear Campaña</a>
+</div>
+
+<table class="table table-striped table-hover shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Ubicación</th>
+            <th>Fechas</th>
+            <th>Meta (Árboles)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in campanas %}
+        <tr>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.ubicacion }}</td>
+            <td>{{ c.fecha_inicio }} al {{ c.fecha_fin }}</td>
+            <td>{{ c.metas_arboles }}</td>
+            <td>
+                <a href="{% url 'campana_update' c.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'campana_delete' c.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">No hay campañas registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,287 @@
+{% extends 'arboles/base.html' %}
+
+{% block title %}Campañas | ReforestaSV{% endblock %}
+
+{% block content %}
+
+<style>
+    /* CONTENEDOR PRINCIPAL */
+
+    .campana-container {
+        max-width: 1150px;
+        margin: 35px auto;
+        padding: 0 15px;
+    }
+
+    /* TARJETA DEL FORMULARIO */
+
+    .campana-card {
+        background: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e7e9ec;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ENCABEZADO VERDE */
+
+    .campana-header {
+        background-color: #1f784d;
+        color: white;
+        padding: 13px 20px;
+    }
+
+    .campana-header h3 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    /* CUERPO */
+
+    .campana-body {
+        padding: 25px 22px;
+    }
+
+    /* CAMPOS EN DOS COLUMNAS */
+
+    .campana-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px 18px;
+    }
+
+    .campana-campo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .campana-campo label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 7px;
+        color: #252b30;
+    }
+
+    /* INPUTS */
+
+    .campana-campo input,
+    .campana-campo select,
+    .campana-campo textarea {
+        width: 100%;
+        min-height: 40px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 9px 12px;
+        font-size: 14px;
+        background: #fff;
+        color: #343a40;
+        box-sizing: border-box;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    .campana-campo input:focus,
+    .campana-campo select:focus,
+    .campana-campo textarea:focus {
+        border-color: #1f784d;
+        box-shadow: 0 0 0 3px rgba(31, 120, 77, 0.12);
+    }
+
+    /* ERRORES */
+
+    .campana-error {
+        color: #dc3545;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    .campana-error ul {
+        margin: 0;
+        padding-left: 18px;
+    }
+
+    /* BOTONES */
+
+    .campana-acciones {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 35px;
+    }
+
+    .campana-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s;
+    }
+
+    .campana-btn-guardar {
+        background: #1f784d;
+        color: white;
+    }
+
+    .campana-btn-guardar:hover {
+        background: #155c39;
+        color: white;
+    }
+
+    .campana-btn-cancelar {
+        background: #6c757d;
+        color: white;
+    }
+
+    .campana-btn-cancelar:hover {
+        background: #545b62;
+        color: white;
+    }
+
+    /* DISEÑO RESPONSIVE */
+
+    @media (max-width: 768px) {
+        .campana-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .campana-container {
+            margin: 20px auto;
+        }
+
+        .campana-body {
+            padding: 20px 15px;
+        }
+
+        .campana-acciones {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+
+<div class="campana-container">
+
+    <div class="campana-card">
+
+        <!-- ENCABEZADO -->
+
+        <div class="campana-header">
+            <h3>
+                {% if form.instance.pk %}
+                Editar Campaña
+                {% else %}
+                Nueva Campaña
+                {% endif %}
+            </h3>
+        </div>
+
+        <!-- FORMULARIO -->
+
+        <div class="campana-body">
+
+            <form method="POST">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                <div class="campana-grid">
+
+                    <!-- NOMBRE -->
+
+                    <div class="campana-campo">
+                        <label for="{{ form.nombre.id_for_label }}">
+                            Nombre
+                        </label>
+
+                        {{ form.nombre }}
+
+                        {% if form.nombre.errors %}
+                        <div class="campana-error">
+                            {{ form.nombre.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- FECHA INICIO -->
+
+                    <div class="campana-campo">
+                        <label for="{{ form.fecha_inicio.id_for_label }}">
+                            Fecha inicio
+                        </label>
+
+                        {{ form.fecha_inicio }}
+
+                        {% if form.fecha_inicio.errors %}
+                        <div class="campana-error">
+                            {{ form.fecha_inicio.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- INSTITUCIÓN BENEFICIARIA -->
+
+                    <div class="campana-campo">
+                        <label for="{{ form.institucion_beneficiaria.id_for_label }}">
+                            Institución beneficiaria
+                        </label>
+
+                        {{ form.institucion_beneficiaria }}
+
+                        {% if form.institucion_beneficiaria.errors %}
+                        <div class="campana-error">
+                            {{ form.institucion_beneficiaria.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- CANTIDAD PROYECTADA -->
+
+                    <div class="campana-campo">
+                        <label for="{{ form.cantidad_proyectada.id_for_label }}">
+                            Cantidad proyectada
+                        </label>
+
+                        {{ form.cantidad_proyectada }}
+
+                        {% if form.cantidad_proyectada.errors %}
+                        <div class="campana-error">
+                            {{ form.cantidad_proyectada.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <!-- BOTONES -->
+
+                <div class="campana-acciones">
+
+                    <a href="{% url 'campana_list' %}" class="campana-btn campana-btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="campana-btn campana-btn-guardar">
+                        Guardar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
