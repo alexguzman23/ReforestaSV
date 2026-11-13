@@ -25,3 +25,5 @@ db.sqlite3
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+# Archivos estáticos generados para producción
+staticfiles/
