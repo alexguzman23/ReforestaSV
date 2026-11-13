@@ -2,6 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,159 +12,186 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
 
-   <!-- CSS general -->
-<link rel="stylesheet" href="{% static 'Gestion_Arboles/reforestasv.css' %}">
+    <!-- CSS general -->
+    <link rel="stylesheet" href="{% static 'Gestion_Arboles/reforestasv.css' %}">
 
-<!-- CSS del menú lateral -->
-<link rel="stylesheet" href="{% static 'menu/menu.css' %}">
+    <!-- CSS del menú lateral -->
+    <link rel="stylesheet" href="{% static 'menu/menu.css' %}?v=3">
 </head>
 
 <body class="rf-body">
 
-{% if user.is_authenticated %}
-<div class="rf-app">
+    {% if user.is_authenticated %}
+    <div class="rf-app">
 
-    <!-- MENÚ LATERAL -->
-    <aside class="offcanvas-lg offcanvas-start rf-sidebar"
-           tabindex="-1" id="rfSidebar">
+        <!-- MENÚ LATERAL -->
+        <aside class="offcanvas-lg offcanvas-start rf-sidebar"
+               tabindex="-1"
+               id="rfSidebar">
 
-        <div class="rf-sidebar-header">
-            <a href="{% url 'inicio' %}" class="rf-brand">
-                <i class="bi bi-tree-fill"></i>
-                <span>ReforestaSV</span>
-            </a>
+            <!-- ENCABEZADO DEL MENÚ -->
+            <div class="rf-sidebar-header">
 
-            <button type="button"
-                    class="btn-close btn-close-white d-lg-none"
-                    data-bs-dismiss="offcanvas"
-                    data-bs-target="#rfSidebar"
-                    aria-label="Cerrar menú"></button>
-        </div>
+                <a href="{% url 'inicio' %}" class="rf-brand">
 
-        <nav class="rf-nav">
+                    <div class="rf-brand-icon">
+                        <i class="bi bi-tree-fill"></i>
+                    </div>
 
-            <a href="{% url 'inicio' %}"
-               class="rf-nav-link {% if request.resolver_match.url_name == 'inicio' %}active{% endif %}">
-                <i class="bi bi-house-door"></i>
-                Inicio
-            </a>
+                    <div class="rf-brand-info">
+                        <span>ReforestaSV</span>
+                        <small>Gestión de reforestación</small>
+                    </div>
 
-            <!-- CRUD DE ÁRBOLES: FUNCIONAL -->
-            <a href="{% url 'arbol_list' %}"
-               class="rf-nav-link {% if request.resolver_match.url_name == 'arbol_list' %}active{% endif %}">
-                <i class="bi bi-tree"></i>
-                Árboles
-            </a>
+                </a>
 
-            <!-- CRUD PENDIENTES: CONECTAR SUS URLS DESPUÉS -->
-
-            <!-- ESPECIES -->
-            <a href="{% url 'especie_list' %}" class="rf-nav-link">
-                <i class="bi bi-flower1"></i>
-                Especies
-            </a>
-
-            <!-- UBICACIONES -->
-            <a href="{% url 'ubicacion_list' %}" class="rf-nav-link">
-                <i class="bi bi-geo-alt"></i>
-                Ubicaciones
-            </a>
-
-            <!-- RESPONSABLES -->
-            <a href="{% url 'responsable_list' %}" class="rf-nav-link">
-                <i class="bi bi-people"></i>
-                Responsables
-            </a>
-
-            <!-- MANTENIMIENTOS -->
-            <a href="{% url 'mantenimiento_list' %}" class="rf-nav-link">
-                <i class="bi bi-calendar-check"></i>
-                Mantenimientos
-            </a>
-
-            <!-- CAMPAÑAS -->
-            <a href="{% url 'campana_list' %}" class="rf-nav-link">
-                <i class="bi bi-megaphone"></i>
-                Campañas
-            </a>
-
-
-        </nav>
-
-        <div class="rf-sidebar-footer">
-            <i class="bi bi-leaf-fill"></i>
-            Cada árbol cuenta
-        </div>
-
-    </aside>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <div class="rf-main">
-
-        <!-- BARRA SUPERIOR -->
-        <header class="rf-topbar">
-
-            <button class="btn rf-menu-toggle d-lg-none"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#rfSidebar"
-                    aria-controls="rfSidebar"
-                    aria-label="Abrir menú">
-                <i class="bi bi-list fs-3"></i>
-            </button>
-
-            <div class="ms-auto d-flex align-items-center gap-3">
-
-                <span class="rf-user">
-                    Hola, <strong>{{ user.username }}</strong>
-                </span>
-
-                <form method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit"
-                            class="btn btn-outline-light btn-sm">
-                        Cerrar sesión
-                    </button>
-                </form>
+                <button type="button"
+                        class="btn-close btn-close-white d-lg-none"
+                        data-bs-dismiss="offcanvas"
+                        data-bs-target="#rfSidebar"
+                        aria-label="Cerrar menú">
+                </button>
 
             </div>
-        </header>
 
-    
-         
-                <!-- NOTIFICACIONES -->
-                <div class="rf-content">
-                    {% if messages %}
-                        {% for message in messages %}
-<div class="alert alert-{% if message.level_tag == 'error' or 'eliminad' in message.message|lower %}danger{% else %}{{ message.level_tag }}{% endif %} alert-dismissible fade show" role="alert">                                {{ message }}
-                                <button type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="alert"
-                                        aria-label="Cerrar"></button>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+            <!-- NAVEGACIÓN LATERAL -->
+            <nav class="rf-nav">
 
+                <div class="rf-nav-heading">
+                    MENÚ PRINCIPAL
+                </div>
 
+                <!-- INICIO -->
+                <a href="{% url 'inicio' %}"
+                   class="rf-nav-link {% if request.resolver_match.url_name == 'inicio' %}active{% endif %}">
+                    <i class="bi bi-house-door"></i>
+                    <span>Inicio</span>
+                </a>
 
+                <!-- ÁRBOLES -->
+                <a href="{% url 'arbol_list' %}"
+                   class="rf-nav-link {% if request.resolver_match.url_name == 'arbol_list' or request.resolver_match.url_name == 'arbol_create' or request.resolver_match.url_name == 'arbol_update' or request.resolver_match.url_name == 'arbol_delete' %}active{% endif %}">
+                    <i class="bi bi-tree"></i>
+                    <span>Árboles</span>
+                </a>
 
-            <!-- CONTENIDO DE CADA MÓDULO -->
-           <main>
-    {% block content %}{% endblock %}
-</main>
+                <!-- ESPECIES -->
+                <a href="{% url 'especie_list' %}"
+                   class="rf-nav-link {% if request.resolver_match.url_name == 'especie_list' or request.resolver_match.url_name == 'especie_create' or request.resolver_match.url_name == 'especie_update' or request.resolver_match.url_name == 'especie_delete' %}active{% endif %}">
+                    <i class="bi bi-flower1"></i>
+                    <span>Especies</span>
+                </a>
 
-</div>
-</div>
-</div>
+                <!-- UBICACIONES -->
+                <a href="{% url 'ubicacion_list' %}"
+                   class="rf-nav-link {% if request.resolver_match.url_name == 'ubicacion_list' or request.resolver_match.url_name == 'ubicacion_create' or request.resolver_match.url_name == 'ubicacion_update' or request.resolver_match.url_name == 'ubicacion_delete' %}active{% endif %}">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>Ubicaciones</span>
+                </a>
 
-{% else %}
-<!-- Contenido para visitantes sin sesión -->
-<main class="container py-4">
-    {% block public_content %}{% endblock %}
-</main>
-{% endif %}
+                <!-- RESPONSABLES -->
+                <a href="{% url 'responsable_list' %}"
+                   class="rf-nav-link {% if request.resolver_match.url_name == 'responsable_list' or request.resolver_match.url_name == 'responsable_create' or request.resolver_match.url_name == 'responsable_update' or request.resolver_match.url_name == 'responsable_delete' %}active{% endif %}">
+                    <i class="bi bi-people"></i>
+                    <span>Responsables</span>
+                </a>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <!-- MANTENIMIENTOS -->
+                <a href="{% url 'mantenimiento_list' %}"
+                   class="rf-nav-link {% if request.resolver_match.url_name == 'mantenimiento_list' or request.resolver_match.url_name == 'mantenimiento_create' or request.resolver_match.url_name == 'mantenimiento_update' or request.resolver_match.url_name == 'mantenimiento_delete' %}active{% endif %}">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Mantenimientos</span>
+                </a>
+
+                <!-- CAMPAÑAS -->
+                <a href="{% url 'campana_list' %}"
+                   class="rf-nav-link {% if request.resolver_match.url_name == 'campana_list' or request.resolver_match.url_name == 'campana_create' or request.resolver_match.url_name == 'campana_update' or request.resolver_match.url_name == 'campana_delete' %}active{% endif %}">
+                    <i class="bi bi-megaphone"></i>
+                    <span>Campañas</span>
+                </a>
+
+            </nav>
+
+            <!-- PIE DEL MENÚ -->
+            <div class="rf-sidebar-footer">
+                <i class="bi bi-leaf-fill"></i>
+                <span>Cada árbol cuenta</span>
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="rf-main">
+
+            <!-- BARRA SUPERIOR -->
+            <header class="rf-topbar">
+
+                <button class="btn rf-menu-toggle d-lg-none"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#rfSidebar"
+                        aria-controls="rfSidebar"
+                        aria-label="Abrir menú">
+                    <i class="bi bi-list fs-3"></i>
+                </button>
+
+                <div class="ms-auto d-flex align-items-center gap-3">
+
+                    <span class="rf-user d-flex align-items-center gap-2">
+                        <i class="bi bi-person-circle fs-4"></i>
+                        <span>
+                            Hola, <strong>{{ user.username }}</strong>
+                        </span>
+                    </span>
+
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="btn btn-outline-light btn-sm">
+                            Cerrar sesión
+                        </button>
+                    </form>
+
+                </div>
+            </header>
+
+            <!-- NOTIFICACIONES -->
+            <div class="rf-content">
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{% if message.level_tag == 'error' or 'eliminad' in message.message|lower %}danger{% else %}{{ message.level_tag }}{% endif %} alert-dismissible fade show"
+                     role="alert">
+                    {{ message }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Cerrar">
+                    </button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <!-- CONTENIDO DE CADA MÓDULO -->
+                <main>
+                    {% block content %}{% endblock %}
+                </main>
+
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+
+    <!-- Contenido para visitantes sin sesión -->
+    <main class="container py-4">
+        {% block public_content %}{% endblock %}
+    </main>
+
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

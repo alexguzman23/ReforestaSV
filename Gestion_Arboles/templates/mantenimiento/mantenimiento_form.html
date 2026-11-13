@@ -36,13 +36,14 @@
             Información del mantenimiento
         </div>
 
-        <form method="post">
+        <form method="post" id="form-mantenimiento">
             {% csrf_token %}
 
             {{ form.non_field_errors }}
 
             <div class="mtto-form-grid">
 
+                <!-- ÁRBOL -->
                 <div class="mtto-campo">
                     <label for="{{ form.arbol.id_for_label }}">
                         Árbol
@@ -51,6 +52,7 @@
                     {{ form.arbol.errors }}
                 </div>
 
+                <!-- TIPO DE ACTIVIDAD -->
                 <div class="mtto-campo">
                     <label for="{{ form.tipo_actividad.id_for_label }}">
                         Tipo de actividad
@@ -59,14 +61,22 @@
                     {{ form.tipo_actividad.errors }}
                 </div>
 
+                <!-- FECHA Y HORA -->
                 <div class="mtto-campo">
                     <label for="{{ form.fecha_actividad.id_for_label }}">
                         Fecha y hora
                     </label>
+
                     {{ form.fecha_actividad }}
+
+                    <small class="text-muted">
+                        Seleccione el día, mes, año y hora.
+                    </small>
+
                     {{ form.fecha_actividad.errors }}
                 </div>
 
+                <!-- COMENTARIOS -->
                 <div class="mtto-campo mtto-full">
                     <label for="{{ form.comentarios.id_for_label }}">
                         Comentarios
@@ -78,17 +88,13 @@
             </div>
 
             <div class="mtto-form-footer">
-                <a
-                    href="{% url 'mantenimiento_list' %}"
-                    class="mtto-btn mtto-btn-secundario"
-                >
+                <a href="{% url 'mantenimiento_list' %}"
+                   class="mtto-btn mtto-btn-secundario">
                     Cancelar
                 </a>
 
-                <button
-                    type="submit"
-                    class="mtto-btn mtto-btn-principal"
-                >
+                <button type="submit"
+                        class="mtto-btn mtto-btn-principal">
                     <i class="bi bi-check-lg"></i>
                     Guardar mantenimiento
                 </button>
@@ -98,6 +104,35 @@
     </div>
 
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Traducir el selector de árboles
+    const selectorArbol = document.getElementById(
+        "{{ form.arbol.id_for_label }}"
+    );
+
+    if (selectorArbol) {
+        const opcionVacia = Array.from(
+            selectorArbol.options
+        ).find(opcion => opcion.value === "");
+
+        if (opcionVacia) {
+            opcionVacia.textContent = "Seleccione un árbol";
+        }
+    }
+
+    // Configurar idioma del campo fecha
+    const campoFecha = document.getElementById(
+        "{{ form.fecha_actividad.id_for_label }}"
+    );
+
+    if (campoFecha) {
+        campoFecha.setAttribute("lang", "es");
+    }
+
+});
+</script>
+
 {% endblock %}
-
-

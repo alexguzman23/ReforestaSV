@@ -1,4 +1,7 @@
 
+.rf-sidebar {
+    border: 5px solid red !important;
+}
 :root {
     --rf-primary: #1f7a4d;
     --rf-dark: #103e29;
@@ -14,7 +17,10 @@ body.rf-body {
     font-family: system-ui, "Segoe UI", Arial, sans-serif;
 }
 
-/* Estructura principal */
+/* =====================================
+   ESTRUCTURA PRINCIPAL
+===================================== */
+
 .rf-app {
     min-height: 100vh;
 }
@@ -24,11 +30,16 @@ body.rf-body {
     margin-left: 260px;
 }
 
-/* Menú lateral */
+/* =====================================
+   MENÚ LATERAL MODERNO
+===================================== */
+
 .rf-sidebar {
     width: 260px !important;
     background: linear-gradient(
-        180deg, #0e3a25, #135236
+        180deg,
+        #0e3a25 0%,
+        #135236 100%
     ) !important;
     color: white;
     border: 0 !important;
@@ -46,80 +57,219 @@ body.rf-body {
     }
 }
 
-.rf-sidebar-header {
-    padding: 27px 22px;
+/* =====================================
+   ENCABEZADO DEL MENÚ
+===================================== */
+
+.rf-sidebar .rf-sidebar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 25px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
-.rf-brand {
-    color: white;
-    text-decoration: none;
-    font-size: 23px;
-    font-weight: 750;
+/* Logo completo */
+
+.rf-sidebar .rf-brand {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 10px;
+    color: white;
+    text-decoration: none;
+    min-width: 0;
 }
 
-.rf-brand:hover {
+.rf-sidebar .rf-brand:hover {
     color: white;
 }
 
-.rf-brand i {
-    font-size: 28px;
+/* Cuadro del árbol */
+
+.rf-sidebar .rf-brand-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    flex-shrink: 0;
 }
 
-/* Opciones de navegación */
-.rf-nav {
-    padding: 12px;
+.rf-sidebar .rf-brand-icon i {
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* Nombre y subtítulo */
+
+.rf-sidebar .rf-brand-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    min-width: 0;
+}
+
+.rf-sidebar .rf-brand-info span {
+    display: block;
+    font-size: 19px;
+    font-weight: 750;
+    line-height: 1.2;
+    color: white;
+    white-space: nowrap;
+}
+
+.rf-sidebar .rf-brand-info small {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #b8d8c5;
+    letter-spacing: 0;
+}
+
+/* =====================================
+   OPCIONES DE NAVEGACIÓN
+===================================== */
+
+.rf-sidebar .rf-nav {
+    padding: 24px 14px;
     display: flex;
     flex-direction: column;
     gap: 7px;
+    margin: 0;
 }
 
-.rf-nav-link {
+/* Título MENÚ PRINCIPAL */
+
+.rf-sidebar .rf-nav-heading {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #a8cfb8;
+    letter-spacing: 1.2px;
+    margin-bottom: 12px;
+    padding: 0 13px;
+}
+
+/* Enlaces del menú */
+
+.rf-sidebar .rf-nav-link {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 12px 17px;
-    border-radius: 10px;
+
+    padding: 13px 15px;
+    margin: 0;
+
+    border-radius: 11px;
     color: #edf7f0;
     text-decoration: none;
+
     font-size: 15px;
-    transition: background .2s;
+    font-weight: 500;
+    line-height: 1.4;
+
+    position: relative;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
-.rf-nav-link i {
+/* Iconos */
+
+.rf-sidebar .rf-nav-link i {
     font-size: 20px;
-    width: 24px;
+    width: 25px;
+    flex-shrink: 0;
     text-align: center;
+    color: #c6e5d2;
 }
 
-a.rf-nav-link:hover,
-.rf-nav-link.active {
-    background: #21834c;
+/* Efecto al pasar el mouse */
+
+.rf-sidebar .rf-nav-link:hover {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    transform: translateX(3px);
+}
+
+.rf-sidebar .rf-nav-link:hover i {
     color: white;
 }
 
+/* Página seleccionada */
+
+.rf-sidebar .rf-nav-link.active {
+    background: #21834c;
+    color: white;
+    font-weight: 650;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.rf-sidebar .rf-nav-link.active i {
+    color: white;
+}
+
+/* Indicador lateral */
+
+.rf-sidebar .rf-nav-link.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 22%;
+    height: 56%;
+    width: 3px;
+    background: #a5e8b9;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Accesibilidad */
+
+.rf-sidebar .rf-nav-link:focus-visible {
+    outline: 2px solid #a5e8b9;
+    outline-offset: 2px;
+}
+
 .rf-nav-pending {
-    opacity: .65;
+    opacity: 0.65;
     cursor: default;
 }
 
-.rf-sidebar-footer {
+/* =====================================
+   PIE DEL MENÚ
+===================================== */
+
+.rf-sidebar .rf-sidebar-footer {
     margin-top: auto;
-    padding: 25px;
+    padding: 20px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    border-top: 1px solid rgba(255,255,255,0.1);
+
     color: #bed9c7;
     font-size: 13px;
 }
 
-.rf-sidebar-footer i {
-    margin-right: 8px;
+.rf-sidebar .rf-sidebar-footer i {
+    font-size: 18px;
+    color: #a5e0b9;
+    margin-right: 0;
 }
 
-/* Barra superior */
+/* =====================================
+   BARRA SUPERIOR
+===================================== */
+
 .rf-topbar {
     background: #16764b;
     color: white;
@@ -143,14 +293,20 @@ a.rf-nav-link:hover,
     color: white;
 }
 
-/* Contenido */
+/* =====================================
+   CONTENIDO
+===================================== */
+
 .rf-content {
     max-width: 1550px;
     padding: 30px 35px;
     margin: 0 auto;
 }
 
-/* Bienvenida */
+/* =====================================
+   BIENVENIDA
+===================================== */
+
 .rf-welcome {
     padding: 30px 0 40px;
 }
@@ -174,13 +330,16 @@ a.rf-nav-link:hover,
     max-width: 700px;
 }
 
-/* Tarjetas */
+/* =====================================
+   TARJETAS
+===================================== */
+
 .rf-module-card {
     background: white;
     border: 1px solid #edf0ed;
     border-radius: 16px;
     padding: 26px 20px;
-    box-shadow: 0 5px 18px rgba(0, 0, 0, .045);
+    box-shadow: 0 5px 18px rgba(0,0,0,.045);
     text-align: center;
     height: 100%;
     display: flex;
@@ -191,7 +350,7 @@ a.rf-nav-link:hover,
 
 .rf-module-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
 }
 
 .rf-module-icon {
@@ -221,7 +380,10 @@ a.rf-nav-link:hover,
     flex-grow: 1;
 }
 
-/* Botones de tarjetas */
+/* =====================================
+   BOTONES DE TARJETAS
+===================================== */
+
 .rf-module-btn {
     display: flex;
     justify-content: center;
@@ -250,8 +412,12 @@ a.rf-module-btn:hover {
     cursor: default;
 }
 
-/* Diseño responsive */
+/* =====================================
+   DISEÑO RESPONSIVE
+===================================== */
+
 @media (max-width: 991.98px) {
+
     .rf-main {
         margin-left: 0;
     }
@@ -271,6 +437,7 @@ a.rf-module-btn:hover {
 }
 
 @media (max-width: 575.98px) {
+
     .rf-user {
         font-size: 12px;
     }
@@ -281,5 +448,11 @@ a.rf-module-btn:hover {
 
     .rf-welcome p {
         font-size: 15px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rf-sidebar .rf-nav-link {
+        transition: none;
     }
 }

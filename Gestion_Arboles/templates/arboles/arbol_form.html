@@ -1,33 +1,94 @@
+
 {% extends 'arboles/base.html' %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card shadow-sm">
+
             <div class="card-header bg-success text-white">
                 <h4 class="mb-0">{{ titulo }}</h4>
             </div>
+
             <div class="card-body">
-                <form method="post">
+                <form method="post" id="form-arbol">
                     {% csrf_token %}
+
                     <div class="row g-3">
                         {% for field in form %}
                         <div class="col-md-6 mb-2">
-                            <label class="form-label fw-bold">{{ field.label }}</label>
+
+                            <label for="{{ field.id_for_label }}"
+                                   class="form-label fw-bold">
+
+                                {% if field.name == 'codigo_unico' %}
+                                    Código único
+                                {% elif field.name == 'fecha_plantacion' %}
+                                    Fecha de plantación
+                                {% elif field.name == 'estado_salud' %}
+                                    Estado de salud
+                                {% elif field.name == 'campana' %}
+                                    Campaña
+                                {% elif field.name == 'especie' %}
+                                    Especie
+                                {% elif field.name == 'ubicacion' %}
+                                    Ubicación
+                                {% elif field.name == 'responsable' %}
+                                    Responsable
+                                {% else %}
+                                    {{ field.label }}
+                                {% endif %}
+
+                            </label>
+
                             {{ field }}
+
                             {% if field.errors %}
-                                <div class="text-danger small">{{ field.errors.0 }}</div>
+                                <div class="text-danger small">
+                                    {{ field.errors.0 }}
+                                </div>
                             {% endif %}
+
                         </div>
                         {% endfor %}
                     </div>
+
                     <div class="mt-4 d-flex justify-content-end gap-2">
-                        <a href="{% url 'arbol_list' %}" class="btn btn-secondary">Cancelar</a>
-                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <a href="{% url 'arbol_list' %}"
+                           class="btn btn-secondary">
+                            Cancelar
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-success">
+                            Guardar
+                        </button>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const formulario = document.getElementById("form-arbol");
+
+    const selectores = formulario.querySelectorAll("select");
+
+    selectores.forEach(function (selector) {
+
+        const primeraOpcion = selector.options[0];
+
+        if (primeraOpcion && primeraOpcion.value === "") {
+            primeraOpcion.textContent = "Seleccione una opción";
+        }
+
+    });
+
+});
+</script>
+
 {% endblock %}
