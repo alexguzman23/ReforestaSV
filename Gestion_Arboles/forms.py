@@ -8,8 +8,7 @@ class ArbolForm(forms.ModelForm):
         fields = ['codigo_unico', 'fecha_plantacion', 'estado_salud', 'campana', 'especie', 'ubicacion', 'responsable']
         widgets = {
             'codigo_unico': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. ARB-2024-001'}),
-            'fecha_plantacion': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'estado_salud': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Excelente/Bueno'}),
+            'fecha_plantacion': forms.DateInput(format='%Y-%m-%d',attrs={'class': 'form-control','type': 'date'}),           'estado_salud': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Excelente/Bueno'}),
             'campana': forms.Select(attrs={'class': 'form-select'}),
             'especie': forms.Select(attrs={'class': 'form-select'}),
             'ubicacion': forms.Select(attrs={'class': 'form-select'}),

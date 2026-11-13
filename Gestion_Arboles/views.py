@@ -46,13 +46,30 @@ def arbol_update(request, pk):
     return render(request, 'arboles/arbol_form.html', {'form': form, 'titulo': 'Modificar Árbol'})
 
 # 4. ELIMINAR
+
 def arbol_delete(request, pk):
     arbol = get_object_or_404(Arbol, pk=pk)
+
     if request.method == 'POST':
-        arbol.delete()
-        messages.success(request, 'Árbol eliminado correctamente.')
+        try:
+            arbol.delete()
+            messages.success(request, 'Árbol eliminado correctamente.')
+
+        except ProtectedError:
+            messages.error(
+                request,
+                'No se puede eliminar este árbol porque tiene '
+                'mantenimientos registrados.'
+            )
+
         return redirect('arbol_list')
-    return render(request, 'arboles/arbol_confirm_delete.html', {'arbol': arbol})
+
+    return render(
+        request,
+        'arboles/arbol_confirm_delete.html',
+        {'arbol': arbol}
+    )
+
 
 
 # ==========================================
@@ -90,13 +107,29 @@ def especie_update(request, pk):
     return render(request, 'especies/especies_form.html', {'form': form, 'titulo': 'Modificar Especie'})
 
 # 4. ELIMINAR ESPECIE
+
 def especie_delete(request, pk):
     especie = get_object_or_404(Especie, pk=pk)
+
     if request.method == 'POST':
-        especie.delete()
-        messages.success(request, 'Especie eliminada correctamente.')
+        try:
+            especie.delete()
+            messages.success(request, 'Especie eliminada correctamente.')
+
+        except ProtectedError:
+            messages.error(
+                request,
+                'No se puede eliminar esta especie porque tiene árboles registrados.'
+            )
+
         return redirect('especie_list')
-    return render(request, 'especies/especies_confirm_delete.html', {'especie': especie})
+
+    return render(
+        request,
+        'especies/especies_confirm_delete.html',
+        {'especie': especie}
+    )
+
 
 
 

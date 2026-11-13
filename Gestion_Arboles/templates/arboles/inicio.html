@@ -111,7 +111,7 @@
             </div>
         </div>
 
-        <!-- CAMPAÑAS: PENDIENTE -->
+                <!-- CAMPAÑAS -->
         <div class="col-md-6 col-xl-3">
             <div class="rf-module-card">
                 <div class="rf-module-icon">
@@ -121,27 +121,10 @@
                 <h3>Campañas</h3>
                 <p>Crea y administra campañas de reforestación.</p>
 
-                <!-- Activar cuando exista campana_list -->
-                <span class="rf-module-btn rf-btn-pending">
-                    Próximamente
-                </span>
-            </div>
-        </div>
-
-        <!-- USUARIOS: PENDIENTE -->
-        <div class="col-md-6 col-xl-3">
-            <div class="rf-module-card">
-                <div class="rf-module-icon">
-                    <i class="bi bi-person"></i>
-                </div>
-
-                <h3>Usuarios</h3>
-                <p>Gestiona los usuarios del sistema.</p>
-
-                <!-- Activar cuando exista usuario_list -->
-                <span class="rf-module-btn rf-btn-pending">
-                    Próximamente
-                </span>
+                <a href="{% url 'campana_list' %}" class="rf-module-btn">
+                    Ir a Campañas
+                    <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
         </div>
 
